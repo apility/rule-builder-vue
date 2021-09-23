@@ -1,0 +1,30 @@
+{
+    "name": "@apility/rule-builder-vue",
+    "author": "Thomas Alrek <thomas@apility.no>",
+    "version": "0.0.1",
+    "scripts": {
+        "build": "npx rollup -c rollup.config.js",
+        "prepare": "npm run build"
+    },
+    "main": "dist/index.js",
+    "type": "module",
+    "license": "MIT",
+    "dependencies": {
+        "dayjs": "^1.10.7",
+        "uuid": "^8.3.2",
+        "v-calendar": "^2.3.2",
+        "vuedraggable": "^2.24.3"
+    },
+    "devDependencies": {
+        "@popperjs/core": "^2.4.0",
+        "@rollup/plugin-buble": "^0.21.3",
+        "@rollup/plugin-commonjs": "^20.0.0",
+        "@rollup/plugin-node-resolve": "^13.0.5",
+        "rollup": "^2.57.0",
+        "rollup-plugin-node-globals": "^1.4.0",
+        "rollup-plugin-uglify": "^6.0.4",
+        "rollup-plugin-vue": "^5.1.0",
+        "vue": "^2.6",
+        "vue-template-compiler": "^2.6.14"
+    }
+}
