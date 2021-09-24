@@ -1,5 +1,5 @@
 <template functional>
-    <div class="RuleBuilder_Widget card mb-3">
+    <div class="RuleBuilder_Widget card mb-3 shadow-sm">
         <div class="RuleBuilder_Widget_Header card-header handle">
             <div class="d-flex justify-content-between align-items-center">
                 <template v-if="props.name">

@@ -16,12 +16,13 @@
 
 <script>
 import { makeRule } from '../../utilities.js'
+import DateRule from '../DateRule.js'
 
 export default {
     name: 'NotRule',
 
     components: {
-        DateRule: () => import('../DateRule.js')
+        DateRule,
     },
 
     props: {
@@ -31,6 +32,10 @@ export default {
         },
         depth: Number,
         maxDepth: Number,
+    },
+
+    created () {
+        console.log('NotRule instance created')
     },
 
     computed: {

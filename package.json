@@ -1,7 +1,7 @@
 {
     "name": "@apility/rule-builder-vue",
     "author": "Thomas Alrek <thomas@apility.no>",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "scripts": {
         "build": "rm -rf ./dist && npx rollup -c rollup.config.js",
         "watch": "npx rollup -w -c rollup.config.js",
@@ -16,6 +16,7 @@
         "dayjs": "^1.10.7",
         "uuid": "^8.3.2",
         "v-calendar": "^2.3.2",
+        "vue-click-outside": "^1.1.0",
         "vuedraggable": "^2.24.3"
     },
     "devDependencies": {

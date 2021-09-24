@@ -14,22 +14,26 @@
         </div>
         <div class="form-check mb-3">
             <input
-                class="form-check-input"
+                :id="`recurring-range-${_uid}`"
+                class="form-check-input me-2"
                 type="checkbox"
-                v-model="singleDay"
+                v-model="range"
             >
-            <label class="form-check-label">
-                Single day
+            <label
+                :for="`recurring-range-${_uid}`"
+                class="form-check-label"
+            >
+                Range
             </label>
         </div>
         <div class="row">
             <div
                 v-if="value.from"
                 class="col-12 form-group"
-                :class="{ 'col-sm-6': !singleDay }"
+                :class="{ 'col-sm-6': range }"
             >
                 <label class="mb-2">
-                    <template v-if="singleDay">
+                    <template v-if="!range">
                         Day:
                     </template>
                     <template v-else>
@@ -63,7 +67,7 @@
                 </select>
             </div>
             <div
-                v-if="value.to && !singleDay"
+                v-if="value.to && range"
                 class="col-12 col-sm-6 form-group"
             >
                 <label class="mb-2">
@@ -139,13 +143,13 @@ export default {
     }),
 
     computed: {
-        singleDay: {
+        range: {
             get () {
-                return dayjs(this.value.from).add(1, 'day').format('YYYY-MM-DD') === dayjs(this.value.to).format('YYYY-MM-DD')
+                return dayjs(this.value.from).add(1, 'day').format('YYYY-MM-DD') !== dayjs(this.value.to).format('YYYY-MM-DD')
             },
 
             set (value) {
-                if (value) {
+                if (!value) {
                     this.value.to = dayjs(this.value.from)
                         .add(1, 'day')
                         .format('YYYY-MM-DD')
@@ -185,7 +189,7 @@ export default {
                     .replace('1901', '0001')
                     .replace('1902', '0002')
                 
-                if (this.singleDay) {
+                if (!this.range) {
                     to = dayjs(from).add(1, 'day')
                         .format('YYYY-MM-DD')
                         .replace('1901', '0001')
@@ -225,7 +229,7 @@ export default {
                         .replace('1901', '0001')
                         .replace('1902', '0002')
                 
-                if (this.singleDay) {
+                if (!this.range) {
                     to = dayjs(from).add(1, 'day')
                         .format('YYYY-MM-DD')
                         .replace('1901', '0001')

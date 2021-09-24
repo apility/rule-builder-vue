@@ -2,30 +2,38 @@
     <div class="RuleBuilder_AddRule d-flex">
         <div class="ms-auto">
             <div class="d-flex">
-                <div class="dropdown me-2">
+                <div
+                    v-click-outside="() => showDropdown = false"
+                    class="me-2"
+                >
                     <button
-                        class="btn btn-primary dropdown-toggle"
                         :disabled="disabled"
-                        type="button"
-                        data-bs-toggle="dropdown"
-                        aria-expanded="false"
+                        @click="showDropdown = !showDropdown"
+                        class="btn btn-primary dropdown-toggle"
                     >
                         + Add rule
                     </button>
-                    <ul class="dropdown-menu">
-                        <li
-                            v-for="rule in rules"
-                            :key="rule.type"
-                        >
-                            <a
-                                class="dropdown-item"
-                                href="#"
-                                @click="add(rule.type)"
+
+                    <div 
+                        v-if="!disabled && showDropdown"
+                        class="card p-1 position-absolute shadow-sm"
+                    >
+                        <ul class="nav flex-column">
+                            <li
+                                v-for="rule in rules"
+                                :key="rule.type"
+                                class="ms-1 nav-item"
                             >
-                                {{ rule.label }}
-                            </a>
-                        </li>
-                    </ul>
+                                <a
+                                    class="nav-link"
+                                    href="#"
+                                    @click="add(rule.type)"
+                                >
+                                    {{ rule.label }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <button
                     :disabled="disabled"
@@ -40,7 +48,7 @@
 </template>
 
 <script>
-import { Dropdown } from 'bootstrap'
+import ClickOutside from 'vue-click-outside'
 
 import rules from '../config/rules.js'
 import { makeRule } from '../utilities.js'
@@ -48,24 +56,23 @@ import { makeRule } from '../utilities.js'
 export default {
     name: 'AddRule',
 
+    directives: {
+        ClickOutside
+    },
+
     props: {
         disabled: Boolean
     },
 
     data: () => ({
+        showDropdown: false,
         rules: rules.filter(rule => !rule.hasChildren),
     }),
 
-    mounted () {
-        this.$nextTick(() => {
-            Array.from(document.querySelectorAll('.dropdown-menu'))
-                .forEach(node => new Dropdown(node))
-        })
-    },
-
     methods: {
         add(rule) {
-            this.$emit('add', makeRule(rule));
+            this.showDropdown = false
+            this.$emit('add', makeRule(rule))
         }
     }
 }

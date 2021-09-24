@@ -7,7 +7,6 @@
             <date-picker
                 v-model="dateRange"
                 is-range
-                is-expanded
                 class="border-0"
             />
         </div>
