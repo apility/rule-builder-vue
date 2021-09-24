@@ -9,6 +9,16 @@ export default [
         }
     },
     {
+        type: 'recurringDateRange',
+        label: 'Recurring date range',
+        hasChildren: false,
+        template: {
+            interval: 'yearly',
+            from: '0001-01-01',
+            to: null
+        }
+    },
+    {
         type: 'dayOfWeek',
         label: 'Day of week',
         hasChildren: false,
@@ -21,15 +31,6 @@ export default [
         label: 'Not',
         hasChildren: false,
         template: {
-            child: null
-        }
-    },
-    {
-        type: 'recurring',
-        label: 'Recurring',
-        hasChildren: false,
-        template: {
-            interval: 'yearly',
             child: null
         }
     },

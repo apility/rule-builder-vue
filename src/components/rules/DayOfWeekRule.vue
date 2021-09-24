@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group">
+    <div class="RuleBuilder_DayOfWeekRule form-group">
         <label class="mb-2">
             Days:
         </label>

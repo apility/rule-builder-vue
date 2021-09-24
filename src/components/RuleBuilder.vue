@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="RuleBuilder">
         <date-rule
             v-model="rule"
             :depth="0"
-            :removeable="removeable"
+            :readOnly="readOnly"
             :max-depth="maxDepth"
             @remove="remove"
         />
@@ -22,9 +22,9 @@ export default {
     },
 
     props: {
-        removeable: {
+        readOnly: {
             type: Boolean,
-            default: false,
+            default: true,
         },
 
         maxDepth: {

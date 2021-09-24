@@ -1,5 +1,5 @@
 <template>
-    <div class="form-group">
+    <div class="RuleBuilder_NotRule form-group">
         <label class="mb-2">
             Rule:
         </label>

@@ -1,7 +1,7 @@
 <template>
-    <div class="form-group">
+    <div class="RuleBuilder_DateRangeRule form-group">
         <label class="mb-2">
-            Date range:
+            Date range
         </label> 
         <div class="form-control">
             <date-picker

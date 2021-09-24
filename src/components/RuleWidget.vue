@@ -1,10 +1,10 @@
 <template functional>
-    <div class="RuleWidget card mb-3">
-        <div class="card-header handle">
-            <div class="d-flex justify-content-between">
+    <div class="RuleBuilder_Widget card mb-3">
+        <div class="RuleBuilder_Widget_Header card-header handle">
+            <div class="d-flex justify-content-between align-items-center">
                 <template v-if="props.name">
                     <span class="me-1">
-                        {{ props.name }}
+                        <strong>{{ props.name }}</strong>
                     </span>
                 </template>
                 <template>
@@ -12,15 +12,29 @@
                         ({{ props.type }})
                     </i>
                 </template>
-                <button
-                    v-if="props.removeable"
-                    class="ms-auto btn-close"
-                    @click="listeners['delete'](null)"
-                />
+                <div
+                    v-if="!props.readOnly"
+                    class="ms-auto d-flex"
+                >
+                    <button
+                        class="btn"
+                        title="Embed in group"
+                        @click="listeners['wrap'](null)"
+                    >
+                        <i class="bi bi-box-arrow-in-down-right"></i>
+                    </button>
+                    <button
+                        class="btn"
+                        title="Delete rule"
+                        @click="listeners['delete'](null)"
+                    >
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
             </div>
         </div>
     
-        <div class="card-bordy p-3">
+        <div class="RuleBuilder_Widget_Body card-bordy p-3">
             <div class="form-group mb-3">
                 <label class="mb-2">
                     Name:
@@ -28,7 +42,7 @@
                 <input
                     type="text"
                     :value="props.name"
-                    placeholder="Rule name (optional)"
+                    placeholder="Rule name"
                     class="form-control"
                     @input="$event => listeners['input']($event.target.value)"
                 >
@@ -48,15 +62,17 @@ export default {
         name: [String, null],
         type: [String, null],
         root: Boolean,
-        removeable: Boolean,
+        readOnly: Boolean,
     }
 }
 </script>
 
 <style lang="scss">
-.RuleWidget {
-    .ghost {
-        opacity: 0;
+.RuleBuilder {
+    &_Widget {
+        .ghost {
+            opacity: 0;
+        }
     }
 }
 </style>

@@ -1,18 +1,18 @@
 <template>
-    <div>
+    <div class="RuleBuilder_GroupRule">
         <div>
             <div class="form-group">
                 <label class="mb-2">
-                    Count:
+                    Must match:
                 </label>
                 <select
                     class="form-select"
                     v-model="countType"
                 >
-                    <option value="all">All must match</option>
-                    <option value="any">Any can match</option>
+                    <option value="all">All rules</option>
+                    <option value="any">Any rule</option>
                     <option value="count">
-                        Count must match
+                        Amount of rules
                     </option>
                 </select>
                 <div class="input-group mt-3">
@@ -31,7 +31,7 @@
             </div>
             <div class="form-group mt-3">
                 <label class="mb-2">
-                    Rules:
+                    Rules
                 </label>
                 <draggable
                     v-model="children"
@@ -39,6 +39,7 @@
                     ghost-class="ghost"
                     @start="drag=true"
                     @end="drag=false"
+                    group="GroupRule"
                 >
                     <date-rule
                         v-for="(rule, i) in children"

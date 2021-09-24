@@ -1,4 +1,5 @@
 import { makeRule } from '../utilities.js'
+import { v4 as uuid } from 'uuid'
 
 import RuleWidget from './RuleWidget.vue'
 import AddRule from './AddRule.vue'
@@ -7,14 +8,14 @@ const DateRangeRule = async () => await import('./rules/DateRangeRule.vue')
 const DayOfWeekRule = async () => await import('./rules/DayOfWeekRule.vue')
 const GroupRule = async () => await import('./rules/GroupRule.vue')
 const NotRule = async () => await import('./rules/NotRule.vue')
-const RecurringRule = async () => await import('./rules/RecurringRule.vue')
+const RecurringDateRangeRule = async () => await import('./rules/RecurringDateRangeRule.vue')
 
 const components = {
     dateRange: DateRangeRule,
     dayOfWeek: DayOfWeekRule,
     group: GroupRule,
     not: NotRule,
-    recurring: RecurringRule
+    recurringDateRange: RecurringDateRangeRule
 }
 
 export default {
@@ -25,6 +26,13 @@ export default {
     render (h, { props, listeners }) {
         const { value = {} } = props
         const { name = null, type = null } = value || {}
+
+        if (value && !value.id) {
+            listeners['input']({
+                ...value,
+                id: uuid()
+            })
+        }
 
         if (props.value) {
             const component = h(components[type], {
@@ -37,8 +45,8 @@ export default {
                     props: {
                         name,
                         type,
-                        removeable: props.removeable === undefined ? true : props.removeable,
-                        root: props.level === 0,
+                        readOnly: props.readOnly !== undefined ? props.removeable : false,
+                        root: props.level === 0
                     },
 
                     on: {

@@ -1,8 +1,8 @@
 <template>
-    <div class="d-flex">
+    <div class="RuleBuilder_AddRule d-flex">
         <div class="ms-auto">
             <div class="d-flex">
-                <div class="dropdown me-3">
+                <div class="dropdown me-2">
                     <button
                         class="btn btn-primary dropdown-toggle"
                         :disabled="disabled"
@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import { Dropdown } from 'bootstrap'
+
 import rules from '../config/rules.js'
 import { makeRule } from '../utilities.js'
 
@@ -53,6 +55,13 @@ export default {
     data: () => ({
         rules: rules.filter(rule => !rule.hasChildren),
     }),
+
+    mounted () {
+        this.$nextTick(() => {
+            Array.from(document.querySelectorAll('.dropdown-menu'))
+                .forEach(node => new Dropdown(node))
+        })
+    },
 
     methods: {
         add(rule) {

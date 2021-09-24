@@ -1,15 +1,19 @@
 {
     "name": "@apility/rule-builder-vue",
     "author": "Thomas Alrek <thomas@apility.no>",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "scripts": {
-        "build": "npx rollup -c rollup.config.js",
+        "build": "rm -rf ./dist && npx rollup -c rollup.config.js",
+        "watch": "npx rollup -w -c rollup.config.js",
         "prepare": "npm run build"
     },
-    "main": "dist/index.js",
+    "main": "dist/bundle.esm.js",
     "type": "module",
     "license": "MIT",
+    "public": true,
     "dependencies": {
+        "bootstrap": "^5.1.1",
+        "bootstrap-icons": "^1.5.0",
         "dayjs": "^1.10.7",
         "uuid": "^8.3.2",
         "v-calendar": "^2.3.2",
@@ -22,8 +26,10 @@
         "@rollup/plugin-node-resolve": "^13.0.5",
         "rollup": "^2.57.0",
         "rollup-plugin-node-globals": "^1.4.0",
-        "rollup-plugin-uglify": "^6.0.4",
+        "rollup-plugin-scss": "^3.0.0",
+        "rollup-plugin-uglify": "^5.0.2",
         "rollup-plugin-vue": "^5.1.0",
+        "sass": "^1.42.1",
         "vue": "^2.6",
         "vue-template-compiler": "^2.6.14"
     }
