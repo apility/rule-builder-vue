@@ -5,9 +5,8 @@
             :depth="0"
             :readOnly="readOnly"
             :max-depth="maxDepth"
-            :is-collapsed="isCollapsed"
+            :colors="colors"
             @remove="remove"
-            @toggle-collapsed="toggleCollapsed"
         />
     </div>
 </template>
@@ -28,6 +27,11 @@ export default {
     }),
 
     props: {
+        colors: {
+            type: Array,
+            default: ['#c4eed6', '#bfdaf4', '#de9f8e', '#f8f789', '#fca3fa']
+        },
+
         readOnly: {
             type: Boolean,
             default: true,
@@ -59,17 +63,6 @@ export default {
     methods: {
         remove () {
             this.rule = null
-        },
-
-        isCollapsed (id) {
-            return this.collapsed.includes(id)
-        },
-
-        toggleCollapsed (id) {            
-            this.$set(this, 'collapsed', this.isCollapsed(id)
-                ? [...this.collapsed.filter(collapsed => collapsed !== id)]
-                : [...this.collapsed, id]
-            )
         }
     }
 }

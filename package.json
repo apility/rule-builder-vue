@@ -1,7 +1,7 @@
 {
     "name": "@apility/rule-builder-vue",
     "author": "Thomas Alrek <thomas@apility.no>",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "scripts": {
         "build": "rm -rf ./dist && npx rollup -c rollup.config.js",
         "watch": "npx rollup -w -c rollup.config.js",
@@ -23,6 +23,7 @@
         "@popperjs/core": "^2.4.0",
         "@rollup/plugin-buble": "^0.21.3",
         "@rollup/plugin-commonjs": "^20.0.0",
+        "@rollup/plugin-json": "^4.1.0",
         "@rollup/plugin-node-resolve": "^13.0.5",
         "rollup": "^2.57.0",
         "rollup-plugin-node-globals": "^1.4.0",

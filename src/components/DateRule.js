@@ -25,7 +25,7 @@ export default {
 
     render (h, { props, listeners }) {
         const { value = {} } = props
-        const { name = null, type = null } = value || {}
+        const { name = null, type = null, id = null } = value || {}
 
         if (value && !value.id) {
             listeners['input']({
@@ -34,38 +34,34 @@ export default {
             })
         }
 
-        const toggle = (id = null) => {
-            if (listeners['toggle-collapsed']) {
-                listeners['toggle-collapsed'](id ? id : props.value.id)
-            }
-        }
-
         if (props.value) {
             const component = h(components[type], {
                 props,
-                on: {
-                    ...listeners,
-                    toggle,
-                }
+                on: listeners
             })
 
-            const colors = ['#c4eed6', '#bfdaf4', '#de9f8e', '#f8f789', '#fca3fa']
-            const color = colors[props.depth % colors.length]
+            let style = {}
+            const colors = props.colors
+
+            if (colors && colors.length) {
+                const color = colors[props.depth % colors.length]
+                style = {
+                    ...style,
+                    'background-color': color,
+                    'border-left-color': color,
+                    'border-left-width': '5px',
+                    '--bs-light-rgb': '255,255,255'
+                }
+            }
 
             const collapsed = props.isCollapsed ? props.isCollapsed(props.value.id) : false
 
             return h(RuleWidget,
                 {
-                    attrs: {
-                        style: {
-                            'background-color': color,
-                            'border-left-color': color,
-                            'border-left-width': '5px',
-                            '--bs-light-rgb': '255,255,255'
-                        }
-                    },
+                    attrs: { style },
 
                     props: {
+                        id,
                         name,
                         type,
                         readOnly: props.readOnly !== undefined ? props.removeable : false,
@@ -81,8 +77,6 @@ export default {
                                 name
                             })
                         },
-
-                        toggle,
 
                         wrap () {
                             if (listeners.input) {

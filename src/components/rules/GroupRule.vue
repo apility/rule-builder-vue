@@ -15,13 +15,16 @@
                         Amount of rules
                     </option>
                 </select>
-                <div class="input-group mt-3">
+                <div
+                    v-if="countType === 'count'"
+                    class="input-group mt-3"
+                >
                     <input
                         ref="value"
                         class="form-control"
-                        :disabled="countType !== 'count'"
                         type="number"
                         :max="children.length"
+                        :disabled="countType !== 'count'"
                         v-model="count"
                     >
                     <span class="input-group-text">
@@ -47,8 +50,7 @@
                         v-model="children[i]"
                         :depth="depth + 1"
                         :max-depth="maxDepth"
-                        :is-collapsed="isCollapsed"
-                        @toggle-collapsed="$emit('toggle', rule.id)"
+                        :colors="colors"
                         @remove="remove(rule)"
                     />
                 </draggable>
@@ -81,7 +83,10 @@ export default {
             type: Object,
             default: () => makeRule('group')
         },
-        isCollapsed: [Function, null],
+        colors: {
+            type: Array,
+            default: ['#c4eed6', '#bfdaf4', '#de9f8e', '#f8f789', '#fca3fa']
+        },
         depth: Number,
         maxDepth: Number,
     },

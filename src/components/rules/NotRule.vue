@@ -8,8 +8,7 @@
                 v-model="child"
                 :depth="depth + 1"
                 :max-depth="maxDepth"
-                :is-collapsed="isCollapsed"
-                @toggle-collapsed="$emit('toggle', child.id)"
+                :colors="colors"
                 @remove="remove"
             />
         </div>
@@ -31,6 +30,10 @@ export default {
         value: {
             type: Object,
             default: () => makeRule('not')
+        },
+        colors: {
+            type: Array,
+            default: ['#c4eed6', '#bfdaf4', '#de9f8e', '#f8f789', '#fca3fa']
         },
         depth: Number,
         maxDepth: Number,

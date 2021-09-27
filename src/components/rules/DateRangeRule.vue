@@ -1,12 +1,14 @@
 <template>
     <div class="RuleBuilder_DateRangeRule form-group">
         <label class="mb-2">
-            Date range
+            Date range:
         </label> 
         <div class="form-control">
             <date-picker
                 v-model="dateRange"
                 is-range
+                :columns="layout.columns"
+                :is-expanded="layout['is-expanded']"
                 class="border-0"
             />
         </div>
@@ -16,11 +18,13 @@
 <script>
 import dayjs from 'dayjs'
 import { makeRule } from '../../utilities.js'
-
+import breakpoints from '../../mixins/breakpoints'
 import DatePicker from 'v-calendar/lib/components/date-picker.umd'
 
 export default {
     name: 'DateRangeRule',
+    
+    mixins: [breakpoints],
 
     components: {
         DatePicker
@@ -36,6 +40,13 @@ export default {
     },
 
     computed: {
+        layout () {
+            return {
+                'is-expanded': true,
+                'columns': this.breakpoints.sm ? 1 : 2
+            }
+        },
+
         dateRange: {
             get () {
                 return {

@@ -1,19 +1,23 @@
 <template functional>
-    <div class="RuleBuilder_Widget card mb-3 shadow" v-bind="data.attrs">
-        <div class="RuleBuilder_Widget_Header card-header handle" v-bind="data.attrs">
+    <div
+        class="RuleBuilder_Widget card mb-3 shadow"
+        v-bind="data.attrs"
+    >
+        <div
+            class="RuleBuilder_Widget_Header card-header handle"
+            v-bind="data.attrs"
+        >
             <div class="d-flex justify-content-between align-items-center">
-                <button class="btn text-primary text-decoration-underline" @click.prevent="listeners.toggle()">
-                    <template v-if="props.name">
-                        <span class="me-1">
-                            <strong>{{ props.name }}</strong>
-                        </span>
-                    </template>
-                    <template>
-                        <i>
-                            ({{ props.type }})
-                        </i>
-                    </template>
-                </button>
+                <template v-if="props.name">
+                    <span class="me-1">
+                        <strong>{{ props.name }}</strong>
+                    </span>
+                </template>
+                <template>
+                    <i>
+                        ({{ props.type }})
+                    </i>
+                </template>
                 <div
                     v-if="!props.readOnly"
                     class="ms-auto d-flex"
@@ -36,10 +40,7 @@
             </div>
         </div>
     
-        <div
-            v-if="!props.collapsed"
-            class="RuleBuilder_Widget_Body card-body bg-light bg-primary"
-        >
+        <div class="RuleBuilder_Widget_Body card-body bg-light bg-primary">
             <div class="form-group mb-3">
                 <label class="mb-2">
                     Name:
@@ -64,6 +65,7 @@ export default {
     name: 'RuleWidget',
 
     props: {
+        id: [String, null],
         name: [String, null],
         type: [String, null],
         root: Boolean,

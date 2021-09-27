@@ -1,4 +1,5 @@
 // import necessary dependencies
+import json from '@rollup/plugin-json'
 import vue from 'rollup-plugin-vue'
 import buble from '@rollup/plugin-buble'
 import commonjs from '@rollup/plugin-commonjs'
@@ -13,6 +14,7 @@ export default {
     'bundle.esm': './src/index.js',
   },
   plugins: [
+      json(),
       vue({ css: true }),
       scss({
         output: "./dist/css/style.css",
