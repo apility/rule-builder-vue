@@ -24,13 +24,12 @@
                                 :key="rule.type"
                                 class="ms-1 nav-item"
                             >
-                                <a
-                                    class="nav-link"
-                                    href="#"
+                                <button
+                                    class="btn text-start nav-link w-100"
                                     @click="add(rule.type)"
                                 >
                                     {{ rule.label }}
-                                </a>
+                                </button>
                             </li>
                         </ul>
                     </div>

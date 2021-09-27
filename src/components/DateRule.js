@@ -34,19 +34,44 @@ export default {
             })
         }
 
+        const toggle = (id = null) => {
+            if (listeners['toggle-collapsed']) {
+                listeners['toggle-collapsed'](id ? id : props.value.id)
+            }
+        }
+
         if (props.value) {
             const component = h(components[type], {
                 props,
-                on: listeners,
+                on: {
+                    ...listeners,
+                    toggle,
+                }
             })
+
+            const colors = ['#c4eed6', '#bfdaf4', '#de9f8e', '#f8f789', '#fca3fa']
+            const color = colors[props.depth % colors.length]
+
+            const collapsed = props.isCollapsed ? props.isCollapsed(props.value.id) : false
 
             return h(RuleWidget,
                 {
+                    attrs: {
+                        style: {
+                            'background-color': color,
+                            'border-left-color': color,
+                            'border-left-width': '5px',
+                            '--bs-light-rgb': '255,255,255'
+                        }
+                    },
+
                     props: {
                         name,
                         type,
                         readOnly: props.readOnly !== undefined ? props.removeable : false,
-                        root: props.level === 0
+                        root: props.depth === 0,
+                        collapsed,
+                        color: 'green',
                     },
 
                     on: {
@@ -57,15 +82,21 @@ export default {
                             })
                         },
 
+                        toggle,
+
                         wrap () {
-                            listeners.input({
-                                ...makeRule('group'),
-                                children: [value]
-                            })
+                            if (listeners.input) {
+                                listeners.input({
+                                    ...makeRule('group'),
+                                    children: [value]
+                                })
+                            }
                         },
 
                         delete () {
-                            listeners.remove()
+                            if (listeners.remove) {
+                                listeners.remove()
+                            }
                         }
                     }
                 },

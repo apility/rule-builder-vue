@@ -5,7 +5,9 @@
             :depth="0"
             :readOnly="readOnly"
             :max-depth="maxDepth"
+            :is-collapsed="isCollapsed"
             @remove="remove"
+            @toggle-collapsed="toggleCollapsed"
         />
     </div>
 </template>
@@ -20,6 +22,10 @@ export default {
     components: {
         DateRule
     },
+
+    data: () => ({
+        collapsed: []
+    }),
 
     props: {
         readOnly: {
@@ -53,6 +59,17 @@ export default {
     methods: {
         remove () {
             this.rule = null
+        },
+
+        isCollapsed (id) {
+            return this.collapsed.includes(id)
+        },
+
+        toggleCollapsed (id) {            
+            this.$set(this, 'collapsed', this.isCollapsed(id)
+                ? [...this.collapsed.filter(collapsed => collapsed !== id)]
+                : [...this.collapsed, id]
+            )
         }
     }
 }

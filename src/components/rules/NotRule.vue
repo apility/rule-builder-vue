@@ -8,6 +8,8 @@
                 v-model="child"
                 :depth="depth + 1"
                 :max-depth="maxDepth"
+                :is-collapsed="isCollapsed"
+                @toggle-collapsed="$emit('toggle', child.id)"
                 @remove="remove"
             />
         </div>
@@ -32,10 +34,7 @@ export default {
         },
         depth: Number,
         maxDepth: Number,
-    },
-
-    created () {
-        console.log('NotRule instance created')
+        isCollapsed: [Function, null],
     },
 
     computed: {

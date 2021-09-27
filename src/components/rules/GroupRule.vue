@@ -31,7 +31,7 @@
             </div>
             <div class="form-group mt-3">
                 <label class="mb-2">
-                    Rules
+                    Rules:
                 </label>
                 <draggable
                     v-model="children"
@@ -47,10 +47,15 @@
                         v-model="children[i]"
                         :depth="depth + 1"
                         :max-depth="maxDepth"
+                        :is-collapsed="isCollapsed"
+                        @toggle-collapsed="$emit('toggle', rule.id)"
                         @remove="remove(rule)"
                     />
                 </draggable>
-                <add-rule @add="add" :disabled="depth >= maxDepth" />
+                <add-rule
+                    @add="add"
+                    :disabled="depth >= maxDepth"
+                />
             </div>
         </div>
     </div>
@@ -76,6 +81,7 @@ export default {
             type: Object,
             default: () => makeRule('group')
         },
+        isCollapsed: [Function, null],
         depth: Number,
         maxDepth: Number,
     },
