@@ -12,7 +12,9 @@
     "license": "MIT",
     "public": true,
     "dependencies": {
+        "@apility/rule-builder": "^1.0.7",
         "bootstrap": "^5.1.1",
+        "date-fns": "^2.24.0",
         "dayjs": "^1.10.7",
         "uuid": "^8.3.2",
         "v-calendar": "^2.3.2",
