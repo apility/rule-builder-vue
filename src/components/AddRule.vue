@@ -17,6 +17,7 @@
                     <div 
                         v-if="!disabled && showDropdown"
                         class="card p-1 position-absolute shadow-sm"
+                        style="z-index: 1000"
                     >
                         <ul class="nav flex-column">
                             <li
